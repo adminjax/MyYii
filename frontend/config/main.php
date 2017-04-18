@@ -44,6 +44,15 @@ return [
             ],
         ],
         */
+       
+
     ],
+    
+    'modules' => [
+        'admin' => [
+            'class' => 'frontend\modules\admin\Module',
+        ],
+    ],
+
     'params' => $params,
 ];
