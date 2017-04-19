@@ -10,11 +10,12 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
+use yii\helpers\Url;
 //customer
 use frontend\modules\admin\block\common\Layout;
 
 AppAsset::register($this);
-?>
+?> 
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -32,11 +33,29 @@ AppAsset::register($this);
 <div class="wrap index">
     <div class="container">
         <div class="header">
-            <div class="left">
-                <div class="logo"><?php echo Layout::getLogo(); ?></div>
-                <div class="title"><?php echo ''; ?></div>
+            <div class="header-top">
+                <div class="left">
+                    <div class="logo"><img src="<?php echo Layout::getLogo(); ?>" /></div>
+                    <div class="title"><?php echo Layout::getTitle(); ?></div>
+                </div>
+                <div class="right">
+                    <div class="user"><?php echo Layout::getCurrentUser(); ?></div>
+                    <div class="time"><?php echo Layout::getTime(); ?></div>
+                    <div class="logout"><a href="<?= Url::toRoute('login/login/logout'); ?>"><span>退出</span></a></div>
+                </div>
             </div>
-        </div>
+            <div class="nav-bar">
+                <ul>
+                    <?php foreach (Layout::getMenu() as $key => $value) :?>
+                        <?php if($value['level'] == 0): ?>
+                            <?php //var_dump($value); ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div> 
+
+        
         <div class="middle">
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],

@@ -4,12 +4,19 @@ namespace frontend\modules\admin\models\layouts;
 use Yii;
 use yii\base\Model;
 use yii\db\ActiveRecord;
+use yii\db\Query;
 
 /**
 * layout的header部分
 */
 class Header extends ActiveRecord
 {
+	protected $menu;
+
+	/**
+	 * [tableName description]
+	 * @return [type] [description]
+	 */
 	public static function tableName()
 	{
 		return 'system_config';
@@ -20,7 +27,12 @@ class Header extends ActiveRecord
 	 * @return [string] [logo的URL]
 	 */
 	public function getLogo(){
-		$this->find('system')->where(['code'=>'admin_logo'])->all();
+		$url = $this->find()
+					->select('value')
+					->where(['code'=>'admin_logo'])
+					->one();
+
+		return $url->value;
 	}
 
 	/**
@@ -28,31 +40,46 @@ class Header extends ActiveRecord
 	 * @return [type] [description]
 	 */
 	public function getTitle(){
+		$url = $this->find()
+					->select('value')
+					->where(['code'=>'admin_title'])
+					->one();
 
+		return $url->value;
 	}
 
 	/**
-	 * [getCurrentUser 获取当前登录用户]
+	 * [getMenu description]
 	 * @return [type] [description]
 	 */
-	public function getCurrentUser(){
+	public function getMenu($pid=0){
+		$menu = (new \yii\db\Query())
+			    ->select(['menu_id', 'code', 'level', 'label', 'path', 'sort'])
+			    ->from('admin_menu')
+			    ->where(['is_active'=>1, 'is_menu'=>1, 'level'=>$pid])
+			    ->orderBy('sort ASC')
+			    ->all();
 
+		$menu = $this->setMenuFormat($menu, 0);
+
+		var_dump($this->menu);
+		return $menu;
 	}
 
-	/**
-	 * [logout 登出]
-	 * @return [void] [description]
-	 */
-	public function logout(){
+	protected function setMenuFormat($arr,$id)
+	{
+	      $tree = array();
+		    foreach($arr as $v) {
+		       if($v['menu_id']==$id) {
+		           $tree[] = $v;
+		           if($v['level']>0) {
+		           
+		             $tree = array_merge($tree,familyclass2($arr,$v['level']));
+		           }
+		       }
+		    }//foreach end
 
-	}
-
-	/**
-	 * [getTime 获取当前时间]
-	 * @return [date] [格式化后的时间]
-	 */
-	public function getTime(){
-
+		   return $tree;
 	}
 }
 

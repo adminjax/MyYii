@@ -22,9 +22,11 @@ class LoginController extends Controller
             //获取post数据
             $post = Yii::$app->request->post();
             //查询数据
-            $data = Login::find()->where(['username'=>$post['LoginForm']['username'],'password'=>'579d9ec9d0c3d687aaa91289ac2854e4'])->all();
+            $data = Login::find()->where(['username'=>$post['LoginForm']['username'],'password'=>md5($post['LoginForm']['password'])])->one();
             
             if($data){
+                $session = Yii::$app->session;
+                $session['user'] = ['user_id'=>$data->u_id, 'username'=>$data->username];
             	//如果成功跳转到控制面板
             	$this->redirect(['/admin/dashboard/dashboard/index']);
             }else{
@@ -36,5 +38,20 @@ class LoginController extends Controller
             $this->redirect(['/admin/index/index/index', 'error'=>$error]);
         }
 	}
+
+    /**
+     * [logout 登出]
+     * @return [void] [description]
+     */
+    public function actionLogout()
+    {
+        //注销用户session
+        $session = Yii::$app->session;
+        unset($session['user']);
+
+        if(!$session['user']){
+            $this->redirect(['/admin/index/index/index']);
+        }
+    }
 }
 ?>
