@@ -49,16 +49,20 @@ class Layout
 	 */
 	public static function getTime()
 	{
-		 $date = Yii::$app->formatter->asDatetime(time());
+		$date = Yii::$app->formatter->asDatetime(time());
 
 		return $date;
 	}
 
+	/**
+	 * [getMenu 获取后台menu]
+	 * @return [type] [description]
+	 */
 	public static function getMenu()
 	{
 		$header = new Header();
 		$menu = $header->getMenu();
-		//var_dump($menu);
+
 		return $menu;
 	}
 }

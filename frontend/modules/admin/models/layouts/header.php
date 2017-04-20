@@ -26,7 +26,8 @@ class Header extends ActiveRecord
 	 * [getLogo 获取后台header部分的logo]
 	 * @return [string] [logo的URL]
 	 */
-	public function getLogo(){
+	public function getLogo()
+	{
 		$url = $this->find()
 					->select('value')
 					->where(['code'=>'admin_logo'])
@@ -39,7 +40,8 @@ class Header extends ActiveRecord
 	 * [getTitle 获取获取网站标题]
 	 * @return [type] [description]
 	 */
-	public function getTitle(){
+	public function getTitle()
+	{
 		$url = $this->find()
 					->select('value')
 					->where(['code'=>'admin_title'])
@@ -52,34 +54,48 @@ class Header extends ActiveRecord
 	 * [getMenu description]
 	 * @return [type] [description]
 	 */
-	public function getMenu($pid=0){
+	public function getMenu()
+	{
 		$menu = (new \yii\db\Query())
-			    ->select(['menu_id', 'code', 'level', 'label', 'path', 'sort'])
+			    ->select(['menu_id', 'code', 'pid', 'label', 'path', 'sort'])
 			    ->from('admin_menu')
-			    ->where(['is_active'=>1, 'is_menu'=>1, 'level'=>$pid])
+			    ->where(['is_active'=>1, 'is_menu'=>1])
 			    ->orderBy('sort ASC')
 			    ->all();
 
-		$menu = $this->setMenuFormat($menu, 0);
+		$menu = $this->makeMenuTree($menu);
 
-		var_dump($this->menu);
 		return $menu;
 	}
 
-	protected function setMenuFormat($arr,$id)
+	/**
+	 * [makeMenuTree 生成menu树状结构]
+	 * @param  [type]  $list  [description]
+	 * @param  string  $pk    [description]
+	 * @param  string  $pid   [description]
+	 * @param  string  $child [description]
+	 * @param  integer $root  [description]
+	 * @return [type]         [description]
+	 */
+	protected function makeMenuTree($list,$pk='menu_id',$pid='pid',$child='child',$root=0)
 	{
-	      $tree = array();
-		    foreach($arr as $v) {
-		       if($v['menu_id']==$id) {
-		           $tree[] = $v;
-		           if($v['level']>0) {
-		           
-		             $tree = array_merge($tree,familyclass2($arr,$v['level']));
-		           }
-		       }
-		    }//foreach end
+	    $tree=array();
 
-		   return $tree;
+	    foreach($list as $key=> $val){
+	        if($val[$pid]==$root){
+	            //获取当前$pid所有子类 
+                unset($list[$key]);
+                if(! empty($list)){
+                    $child=$this->makeMenuTree($list,$pk,$pid,$child,$val[$pk]);
+                    if(!empty($child)){
+                        $val['child']=$child;
+                    }                   
+                }              
+                $tree[]=$val; 
+	        }
+	    }   
+
+	    return $tree;
 	}
 }
 

@@ -47,9 +47,27 @@ AppAsset::register($this);
             <div class="nav-bar">
                 <ul>
                     <?php foreach (Layout::getMenu() as $key => $value) :?>
-                        <?php if($value['level'] == 0): ?>
-                            <?php //var_dump($value); ?>
-                        <?php endif; ?>
+                        <li class="level<?php echo $value['pid'].' '.$value['code']; ?>">
+                            <a href="<?= Url::toRoute($value['path']); ?>"><span><?php echo $value['label']; ?></span></a>
+                            <?php if(!empty($value['child'])): ?>
+                                <ul>
+                                    <?php foreach($value['child'] as $ke => $val): ?>
+                                        <li class="level<?php echo $val['pid'].' '.$val['code']; ?>">
+                                            <a href="<?= Url::toRoute($val['path']); ?>"><span><?php echo $val['label']; ?></span></a>
+                                            <?php if(!empty($val['child'])): ?>
+                                                <ul>
+                                                    <?php foreach($val['child'] as $k => $v): ?>
+                                                        <li class="level<?php echo $v['pid'].' '.$v['code']; ?>">
+                                                            <a href="<?= Url::toRoute($v['path']); ?>"><span><?php echo $v['label']; ?></span></a>
+                                                        </li>
+                                                    <?php endforeach; ?>
+                                                </ul>
+                                            <?php endif; ?>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endif; ?>
+                        </li>
                     <?php endforeach; ?>
                 </ul>
             </div>
