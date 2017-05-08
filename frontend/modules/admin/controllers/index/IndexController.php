@@ -10,7 +10,7 @@ use frontend\modules\admin\models\index\LoginForm;
  */
 class IndexController extends Controller
 {
-	public $layouts = "index";
+	public $layout = "index";
 
     /**
      * Renders the index view for the module
@@ -18,6 +18,8 @@ class IndexController extends Controller
      */
     public function actionIndex()
     {
+        $this->getView()->title = "后台登录";
+
     	$model = new LoginForm();
         $get = Yii::$app->request->get();
         if(array_key_exists('error', $get)){
@@ -25,8 +27,7 @@ class IndexController extends Controller
         }else{
             $error = '';
         }
-
-    	$this->layout='@app/modules/admin/views/layouts/top-middle-bottom.php';  
+    	
         return $this->render('index', ['model' => $model, 'error'=>$error]);
     }
 }

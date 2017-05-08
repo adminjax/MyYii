@@ -1,14 +1,234 @@
 /**
- * widgets
+ * reset
+ */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	-webkit-box-sizing:border-box; /* Safari */
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
+/**
+ * 将边框线算在盒子模型中
+ */
+*{
+	box-sizing:border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	-webkit-box-sizing:border-box; /* Safari */
+}
+
+
+/**
+ * 清除浮动
+ */
+.clearFloat:after{
+	content: '.';
+	display: block;
+	height: 0px;
+	overflow: hidden;
+	clear: both;
+}
+
+/**
+ * container
+ */
+.wrap>.container{
+    padding: 0px; 
+    min-width: 1024px;
+    width: 100%;
+}
+
+/**
+ * header
  */
 
+.header .header-top{
+	height: 50px;
+	background: -webkit-linear-gradient(#31323A, #737377);/* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(#31323A, #737377);/* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(#31323A, #737377);/* Firefox 3.6 - 15 */
+	background: linear-gradient(#31323A, #737377);/* 标准的语法 */
+	padding: 0px 30px;
+	color: #fff;
+}
+.header .header-top .left{
+	float: left;
+	width: 50%;
+	height: 100%;
+}
+.header .header-top .right{
+	float: right;
+	width: 50%;
+}
+.header .header-top .logo img{
+	height: 40px;
+	margin-top: 5px;
+}
+.header .header-top .logo,
+.header .header-top .title{
+	display: inline-block;
+	line-height: 50px;
+	height: 100%;
+}
+.header .header-top .title{
+	font-weight: 600;
+	font-size: 18px;
+	vertical-align: top;
+}
+.header .header-top .right{
+	text-align: right;
+}
+.header .header-top .right>div{
+	display: inline-block;
+	line-height: 50px;
+}
+.separator{
+	display: inline-block;
+	line-height: 50px;
+	margin: 0px 3px;
+	color: #9C9C9C;
+}
+.header .header-top a{
+	color: #F1B407;
+	text-decoration: underline;
+}
+
+/**
+ * nav-bar
+ */
+.nav-bar{
+	background: #666e73;
+	border-bottom: 1px solid #000;
+	border-top: 1px solid #868686;
+}
+.nav-bar a{
+	color: #fff;
+	font-size: 15px;
+	text-decoration: inherit;
+	display: block;
+	width: 100%;
+}
+.nav-bar a:hover{
+	color: #ccc;
+}
+.nav-bar ul{
+	display: none;
+}
+.nav-bar>ul{
+	display: block;
+	text-align: left;
+}
+.nav-bar>ul .level0{
+	float: left;
+	padding: 5px 10px;
+	background: url("../images/nav1_sep.gif") no-repeat 0 0;
+}
+.nav-bar{
+	padding: 0px 30px;
+}
+.nav-bar>ul .level0:hover>ul{
+	display: block;
+	position: absolute;
+	margin-top: 5px;
+	margin-left: -10px;
+	border: 1px solid #000;
+}
+.nav-bar>ul .level0:hover>ul a{
+	color: #000;
+}
+.nav-bar>ul .level0 li:hover>ul{
+	display: block;
+	position: absolute;
+	z-index: 9;
+	top: 25px;
+	left: 42px;
+}
+.nav-bar .level0 li{
+	width: 150px;
+	background: #E2ECF5;
+	padding: 3px 5px;
+	border-bottom: 1px dashed;
+}
+.nav-bar>ul .level0:hover ul{
+	border: 1px solid #000;
+}
+.nav-bar .level0 li:last-child{
+	border-bottom: none;
+}
+/**
+ * widgets
+ */
 
 
 /**
  * index page
  */
 .admin-index-index{
-    width: 300px;
+    width: 500px;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 200px;
+    padding: 50px 100px;
+    border-radius: 5px;
+    background: -webkit-linear-gradient(#9C9C9C, #E4E4E4);/* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#9C9C9C, #E4E4E4);/* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#9C9C9C, #E4E4E4);/* Firefox 3.6 - 15 */
+    background: linear-gradient(#9C9C9C, #E4E4E4);/* 标准的语法 */
+}
+.admin-index-index .btn{
+	width: 100%;
+}
+.admin-index-index>div{
+	text-align: center;
+}
+.admin-index-index .msg{
+	color: red;
+}
+
+/**
+ * dashboard page
+ */
+.dashboard{
+	padding: 0px 30px;
 }

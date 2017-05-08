@@ -10,7 +10,7 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'controllerNamespace' => 'frontend\controllers',
+    'defaultRoute'=>'home/index/index',
     'charset' => 'utf-8',
     'language' => 'zh-CN',
     'timeZone' => 'Asia/Shanghai',
@@ -61,6 +61,9 @@ return [
     'modules' => [
         'admin' => [
             'class' => 'frontend\modules\admin\Module',
+        ],
+        'home' => [
+            'class' => 'frontend\modules\home\Module',
         ],
     ],
 

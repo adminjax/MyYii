@@ -26,26 +26,27 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <?=Html::cssFile('@web/skin/admin/css/web.css')?>
+    <?=Html::cssFile('@web/skin/admin/js/custom.js')?>
 </head>
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap index">
+<div class="wrap">
     <div class="container">
         <div class="header">
-            <div class="header-top">
+            <div class="header-top clearFloat">
                 <div class="left">
                     <div class="logo"><img src="<?php echo Layout::getLogo(); ?>" /></div>
                     <div class="title"><?php echo Layout::getTitle(); ?></div>
                 </div>
                 <div class="right">
-                    <div class="user"><?php echo Layout::getCurrentUser(); ?></div>
-                    <div class="time"><?php echo Layout::getTime(); ?></div>
+                    <div class="user"><?php echo Layout::getCurrentUser(); ?></div><span class="separator">|</span>
+                    <div class="time"><?php echo Layout::getTime(); ?></div><span class="separator">|</span>
                     <div class="logout"><a href="<?= Url::toRoute('login/login/logout'); ?>"><span>退出</span></a></div>
                 </div>
             </div>
             <div class="nav-bar">
-                <ul>
+                <ul class="clearFloat">
                     <?php foreach (Layout::getMenu() as $key => $value) :?>
                         <li class="level<?php echo $value['pid'].' '.$value['code']; ?>">
                             <a href="<?= Url::toRoute($value['path']); ?>"><span><?php echo $value['label']; ?></span></a>
