@@ -18,10 +18,9 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
 	vertical-align: baseline;
 	box-sizing:border-box;
-	-moz-box-sizing:border-box; /* Firefox */
+	-moz-box-sizing:border-box; /*font: inherit; Firefox */
 	-webkit-box-sizing:border-box; /* Safari */
 }
 /* HTML5 display-role reset for older browsers */
@@ -70,6 +69,14 @@ table {
 	overflow: hidden;
 	clear: both;
 }
+
+/**
+ * 字体
+ */
+*{
+	font-family:微软雅黑,"Microsoft Yahei",arial;
+}
+
 
 /**
  * container
@@ -200,6 +207,19 @@ table {
 /**
  * widgets
  */
+
+
+/**
+ * header-title
+ */
+.header-title{
+	border-bottom: 3px solid #ccc;
+	padding: 5px 0px;
+	margin-top: 10px;
+	color: #eb5e00;
+	font-size: 15px;
+	font-weight: 600;
+}
 
 
 /**

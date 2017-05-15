@@ -13,8 +13,7 @@ class Layout
 	 * [getLogo 获取后台logo]
 	 * @return [type] [description]
 	 */
-	public static function getLogo()
-	{
+	public static function getLogo(){
 		$header = new Header();
 		$logo = $header->getLogo();
 
@@ -25,8 +24,7 @@ class Layout
 	 * [getTitle 获取后台标题]
 	 * @return [type] [description]
 	 */
-	public static function getTitle()
-	{
+	public static function getTitle(){
 		$header = new Header();
 		$title = $header->getTitle();
 
@@ -37,8 +35,7 @@ class Layout
 	 * [getCurrentUser 获取当前登录用户]
 	 * @return [string] [description]
 	 */
-	public static function getCurrentUser()
-	{
+	public static function getCurrentUser(){
 		$session = Yii::$app->session;
 		return $session['user']['username'];
 	}
@@ -47,8 +44,7 @@ class Layout
 	 * [getTime 获取当前时间]
 	 * @return [date] [格式化后的时间]
 	 */
-	public static function getTime()
-	{
+	public static function getTime(){
 		$date = Yii::$app->formatter->asDatetime(time());
 
 		return $date;
@@ -58,8 +54,7 @@ class Layout
 	 * [getMenu 获取后台menu]
 	 * @return [type] [description]
 	 */
-	public static function getMenu()
-	{
+	public static function getMenu(){
 		$header = new Header();
 		$menu = $header->getMenu();
 
